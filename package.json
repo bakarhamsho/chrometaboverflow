@@ -1,0 +1,25 @@
+{
+  "name": "chromedump",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node chromedump.js",
+    "dump": "node chromedump.js",
+    "fast": "node chromedump.js --fast",
+    "keep": "node chromekeep.js",
+    "keep-latest": "node chromekeep.js \"$(ls -t *.md 2>/dev/null | head -1)\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chrome-remote-interface": "^0.33.3",
+    "dotenv": "^16.4.5",
+    "inquirer": "^8.2.6",
+    "node-fetch": "^2.7.0",
+    "openai": "^4.63.0",
+    "p-limit": "^3.1.0"
+  }
+}
