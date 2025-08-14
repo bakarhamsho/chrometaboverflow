@@ -1,4 +1,4 @@
-# ChromeDump and ChromeKeep
+# ChromeDump and ChromeKeep - manage your chrome tab overload in markdown
 
 <img width="1150" height="590" alt="image" src="https://github.com/user-attachments/assets/d69ef7df-9fcb-415f-b5f8-9b748945a2a3" />
 
