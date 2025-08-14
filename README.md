@@ -20,7 +20,7 @@ ChromeTabOverflow provides four command-line tools that work together:
 
 ## Features
 
-### ChromeDump
+### `npm run fast` (or `npm run dump` to fast + summarize)
 - Extracts Chrome tabs from all windows using macOS automation
 - Fast mode for instant tab dump without content processing
 - Content reading via Jina.ai (first 30k words per tab) 
@@ -29,7 +29,7 @@ ChromeTabOverflow provides four command-line tools that work together:
 - Real-time progress tracking
 - Markdown export with clickable links and summaries
 
-### ChromeKeep
+### `npm run keep <file.md>` or `npm run keep-latest`
 - Parses URLs from markdown files (both markdown links and bare URLs)
 - Compares open tabs against saved URLs
 - Interactive multiselect interface for tab review
@@ -37,7 +37,7 @@ ChromeTabOverflow provides four command-line tools that work together:
 - Processes tabs individually to handle index changes
 - Batch processing for large tab counts to avoid command line limits
 
-### ChromeRecommend
+### `npm run recommend <file.md>` or `npm run recommend-latest`
 - AI-powered analysis using GPT-5 with chain of thought reasoning
 - Pattern recognition for domains, topics, and work contexts
 - Smart grouping suggestions for logical window organization
@@ -45,7 +45,7 @@ ChromeTabOverflow provides four command-line tools that work together:
 - Detailed reports with reorganization plans
 - Optimizations for workflow efficiency and reduced context switching
 
-### ChromeReorg
+### `npm run reorg`
 - Automated execution of reorganization plans using AppleScript
 - Window management - creates new windows and moves tabs between them
 - Uses GPT-5 to generate fresh reorganization instructions based on current tab state
@@ -275,4 +275,4 @@ You may need to grant permission for Terminal/iTerm to control Chrome:
 
 ChromeReorg generates fresh reorganization instructions using GPT-5 by analyzing current tab state against previous recommendations, ensuring accuracy even if tabs have changed since initial analysis.
 
-Processing time scales with tab count and content complexity. Fast mode provides immediate access to tab lists while full processing continues in background.
+Processing time scales with tab count and content complexity. Fast mode provides immediate access to tab lists!
