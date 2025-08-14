@@ -1,5 +1,8 @@
 # ChromeDump
 
+<img width="1150" height="590" alt="image" src="https://github.com/user-attachments/assets/d69ef7df-9fcb-415f-b5f8-9b748945a2a3" />
+
+
 A Node.js toolkit with two tools for Chrome tab management:
 - **ChromeDump**: Extracts all Chrome tabs, reads content, generates AI summaries, and exports to markdown
 - **ChromeKeep**: Compares open tabs against a markdown file and lets you close tabs not saved in markdown
