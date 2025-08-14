@@ -2,6 +2,9 @@
 
 A Node.js toolkit for managing Chrome tab overload using markdown exports and AI analysis.
 
+<img width="1150" height="590" alt="image" src="https://github.com/user-attachments/assets/d69ef7df-9fcb-415f-b5f8-9b748945a2a3" />
+
+
 ## Problem
 
 Having hundreds of open Chrome tabs across multiple windows makes it difficult to find content, impacts browser performance, and reduces productivity. Manually organizing tabs is time-consuming and organizing strategies often fail as new tabs accumulate.
