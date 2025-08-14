@@ -1,11 +1,13 @@
-# ChromeDump and ChromeKeep - manage your chrome tab overload in markdown
+# ChromeTabOverflow - manage your chrome tab overload with markdown and AI
 
 <img width="1150" height="590" alt="image" src="https://github.com/user-attachments/assets/d69ef7df-9fcb-415f-b5f8-9b748945a2a3" />
 
 
-A Node.js toolkit with two tools for Chrome tab management:
+A Node.js toolkit with four tools for comprehensive Chrome tab management:
 - **ChromeDump**: Extracts all Chrome tabs, reads content, generates AI summaries, and exports to markdown
 - **ChromeKeep**: Compares open tabs against a markdown file and lets you close tabs NOT present in markdown
+- **ChromeRecommend**: Analyzes tab patterns using AI and provides intelligent reorganization recommendations
+- **ChromeReorg**: Automatically executes approved reorganization plans by moving tabs between windows
 
 created in Claude Code. note that Claude Code's bash tool has a 10min timeout and so this process will prematurely exit if use inside claude code for >100 tabs by default. just tell it to use bash tool but set for a 30 minute timeout instead of its default 10.
 
@@ -16,7 +18,7 @@ created in Claude Code. note that Claude Code's bash tool has a 10min timeout an
 - ⚡ **Fast mode** (`--fast` flag) - instant tab dump without API calls or processing
 - ⚡ **Fast initial dump** - instant markdown with all tab titles and URLs (even in full mode)
 - 📖 **Read tab content** via Jina.ai (first 30k words per tab)
-- 🤖 **AI summaries** using OpenAI GPT-4o-mini
+- 🤖 **AI summaries** using OpenAI GPT-5-nano
 - ⚡ **Sequential processing** with rate limiting and error handling
 - 📊 **Real-time progress** tracking with counters, percentages, and elapsed time
 - 📝 **Dense markdown export** with clickable links and summaries
@@ -28,6 +30,22 @@ created in Claude Code. note that Claude Code's bash tool has a 10min timeout an
 - 🗑️ **Safe tab closing** with confirmation prompt and batch processing
 - 🎯 **Tab preservation** - keep only tabs you've saved in markdown
 - ⚡ **Handles large batches** - processes tabs in batches of 20 to avoid command line limits
+
+### ChromeRecommend
+- 🤖 **AI-powered analysis** using GPT-5 with chain of thought reasoning
+- 📊 **Pattern recognition** - identifies domains, topics, work contexts, and usage patterns
+- 🏗️ **Smart grouping suggestions** - recommends logical window organizations
+- 📋 **Structured recommendations** with specific actionable steps
+- 📝 **Detailed reports** - generates comprehensive reorganization plans
+- 🎯 **Productivity focus** - optimizes for workflow efficiency and context switching reduction
+
+### ChromeReorg
+- 🔄 **Automated execution** of approved reorganization plans using AppleScript
+- 🪟 **Window management** - creates new windows and moves tabs between them
+- 📋 **Plan parsing** - reads recommendations from ChromeRecommend output
+- ✅ **Safe execution** - shows preview and requires confirmation before changes
+- 🎯 **Precise control** - moves specific tabs by URL matching for accuracy
+- 🔒 **Rollback support** - can undo changes if something goes wrong
 
 ## Installation
 
@@ -54,7 +72,7 @@ export OPENAI_API_KEY=sk-proj-your-openai-key-here
 ```
 
 ### Required
-- `OPENAI_API_KEY`: Your OpenAI API key for generating summaries (not needed for `--fast` mode)
+- `OPENAI_API_KEY`: Your OpenAI API key for generating summaries (ChromeDump full mode) and reorganization recommendations (ChromeRecommend). Not needed for ChromeDump `--fast` mode, ChromeKeep, or ChromeReorg.
 
 ## Rate Limits & Performance
 
@@ -82,14 +100,14 @@ export OPENAI_API_KEY=sk-proj-your-openai-key-here
 ### ChromeDump
 Export all tabs with AI summaries:
 ```bash
-# Basic usage (requires OPENAI_API_KEY)
+# Fast mode - instant tab dump without content/AI processing!!! try this first!
+npm run fast
+
+# fast dump + summarize usage (requires OPENAI_API_KEY in .env)
 npm run dump
 
 # Or set environment variable inline
 OPENAI_API_KEY=your_key npm run dump
-
-# Fast mode - instant tab dump without content/AI processing
-npm run fast
 
 # Or directly with flag
 node chromedump.js --fast
@@ -108,6 +126,29 @@ npm run keep-latest
 node chromekeep.js your-saved-tabs.md
 ```
 
+### ChromeRecommend
+Analyze tab patterns and get AI reorganization recommendations:
+```bash
+# Analyze specific chromedump file (requires OPENAI_API_KEY)
+npm run recommend open-tabs-fast-2025-08-14T20-33-43-477Z.md
+
+# Or analyze the latest chromedump file automatically
+npm run recommend-latest
+
+# Or directly
+node chromerecommend.js your-chromedump-file.md
+```
+
+### ChromeReorg
+Execute approved reorganization plans automatically:
+```bash
+# Execute reorganization from recommendations file
+npm run reorg chrome-organization-recommendations-2025-08-14T20-34-03-918Z.md
+
+# Or directly
+node chromereorg.js your-recommendations-file.md
+```
+
 **ChromeKeep Workflow:**
 1. Reads URLs from your markdown file
 2. Gets all open Chrome tabs
@@ -115,13 +156,25 @@ node chromekeep.js your-saved-tabs.md
 4. Shows multiselect list (all pre-selected)
 5. Confirms before closing selected tabs
 
-**Typical Combined Workflow:**
+**Complete Workflow:**
 ```bash
 # 1. Export your current tabs
-npm run fast          # or npm run dump for full export
+npm run fast          # or npm run dump for full export with AI summaries
 
-# 2. Clean up tabs based on what you just exported
+# 2. Get AI reorganization recommendations  
+npm run recommend-latest
+
+# 3. Execute the reorganization (optional)
+npm run reorg chrome-organization-recommendations-*.md
+
+# 4. Clean up tabs based on what you exported (optional)
 npm run keep-latest
+```
+
+**Quick Analysis Workflow:**
+```bash
+# Fast dump + immediate AI analysis
+npm run fast && npm run recommend-latest
 ```
 
 ## Output Format
@@ -167,12 +220,56 @@ Generates **two timestamped markdown files**:
 ### ChromeKeep
 Provides interactive CLI output and closes selected tabs - no file output.
 
+### ChromeRecommend
+Generates **timestamped analysis report** (`chrome-organization-recommendations-TIMESTAMP.md`):
+
+### ChromeReorg
+Reads recommendations files and executes reorganization - no file output, modifies Chrome directly.
+
+**Report Format:**
+```markdown
+# Chrome Tab Organization Recommendations
+Generated: 8/14/2025, 8:34:03 PM
+Source: open-tabs-fast-2025-08-14T20-33-43-477Z.md
+Total tabs: 89 across 15 windows
+
+## AI Analysis
+[Chain of thought reasoning about current tab organization patterns]
+
+## Structured Recommendations
+
+### Current State Analysis
+**Current Organization:** Brief assessment of existing window structure
+**Main Issues:**
+- Issue 1: Too many scattered tabs
+- Issue 2: Mixed contexts in single windows
+
+### Recommended Window Organization
+1. **Development & Documentation**
+   Purpose: Coding resources and API docs
+   Estimated tabs: 25
+   Priority: high
+
+2. **Project Management & Communication** 
+   Purpose: Work coordination and team tools
+   Estimated tabs: 12
+   Priority: medium
+
+### Specific Actions
+1. **CREATE NEW WINDOW** 
+   - Description: Group all GitHub and documentation tabs
+   - Benefit: Reduces context switching during development
+
+## Current Window Details (for reference)
+[Detailed breakdown of existing windows and domains]
+```
+
 ## Requirements
 
 - macOS (uses AppleScript for Chrome automation)
 - Google Chrome running
 - Node.js
-- OpenAI API key (ChromeDump full mode only, not needed for `--fast` mode)
+- OpenAI API key (ChromeDump full mode and ChromeRecommend, not needed for ChromeDump `--fast` mode, ChromeKeep, or ChromeReorg)
 
 ## Permissions
 

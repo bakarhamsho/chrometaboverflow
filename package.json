@@ -1,5 +1,5 @@
 {
-  "name": "chromedump",
+  "name": "chrometaboverflow",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,15 @@
     "fast": "node chromedump.js --fast",
     "keep": "node chromekeep.js",
     "keep-latest": "node chromekeep.js \"$(ls -t *.md 2>/dev/null | head -1)\"",
+    "recommend": "node chromerecommend.js",
+    "recommend-latest": "node chromerecommend.js \"$(ls -t open-tabs-*.md 2>/dev/null | head -1)\"",
+    "reorg": "node chromereorg.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "description": "",
+  "description": "A Node.js toolkit for comprehensive Chrome tab management with AI-powered analysis and organization",
   "dependencies": {
     "chrome-remote-interface": "^0.33.3",
     "dotenv": "^16.4.5",
