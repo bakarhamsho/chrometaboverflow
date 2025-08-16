@@ -43,15 +43,6 @@ const SKIP_DOMAINS = [
     'outlook.com',
     'yahoo.com',
     
-    // Sign-in/auth pages that won't have content
-    'accounts.google.com',
-    'login.microsoftonline.com',
-    'github.com/login',
-    'twitter.com/login',
-    'facebook.com/login',
-    'x.com/login',
-    'linkedin.com/login',
-    
     // Social media and forums (often have auth walls)
     // 'stackoverflow.com',
     // 'stackexchange.com',
