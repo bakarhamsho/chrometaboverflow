@@ -18,6 +18,28 @@ ChromeTabOverflow provides four command-line tools that work together:
 - **ChromeRecommend**: Analyzes tab patterns using GPT-5 and generates reorganization recommendations
 - **ChromeReorg**: Executes reorganization plans by automatically moving tabs between windows using AppleScript
 
+## Basic fast usage without AI
+
+```bash
+# npm install # if first time
+
+# quickly dump all your open tabs
+npm run fast
+
+# manually open up the generated .md file and delete urls in the .md file
+# do it
+
+# close the tabs you deleted in the markdown file
+npm run keep-latest
+```
+
+then after the fast pass, if you want a reading run where you get summaries of every url with `gpt-5-nano`
+
+```bash
+# have OPENAI_API_KEY
+npm run dump
+```
+
 ## Features
 
 ### `npm run fast` (or `npm run dump` to fast + summarize)

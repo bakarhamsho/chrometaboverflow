@@ -82,7 +82,7 @@ Please generate a reorganization plan that:
 Focus on practical productivity improvements while working with the ACTUAL current tab state.`
                 }
             ],
-            temperature: 0.2
+            // temperature: 0.2
         });
         
         const content = response.choices[0]?.message?.content || '{}';
